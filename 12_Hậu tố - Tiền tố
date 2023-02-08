@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pii pair<int,int>
+const int MOD = (int)(1e9+7);
+int main(){
+    string s;
+    cin>>s;
+    stack<string>st;
+    for(char x:s){
+        if(isalpha(x)){
+            st.push(string(1,x));
+        }
+        else{
+            string s1=st.top();st.pop();
+            string s2=st.top();st.pop();
+            st.push(x+s2+s1);
+        }
+    }
+    cout<<st.top()<<endl;
+    system("pause");
+}
