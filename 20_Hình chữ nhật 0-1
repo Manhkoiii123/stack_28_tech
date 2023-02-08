@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pii pair<int,int>
+const int MOD = (int)(1e9+7);
+int tinh_max(int a[],int n){
+    int res=0;
+    int i=0;
+    stack<int>st;
+    while(i<n){
+        if(st.empty()||a[st.top()]<=a[i]) {
+            st.push(i);
+            ++i;
+        }
+        else{
+            int t=st.top();st.pop();
+            if(st.empty()){
+                res=max(res,i*a[t]);
+            }
+            else{
+                res=max(res,(i-st.top()-1)*a[t]);
+            }
+        }
+    }
+    while(!st.empty()){
+        int t=st.top();st.pop();
+        if(st.empty()){
+            res=max(res,i*a[t]);
+        }
+        else{
+            res=max(res,(i-st.top()-1)*a[t]);
+        }
+    }
+    return res;
+}
+
+void solve(){
+    int n,m;
+    cin>>n>>m;
+    int a[n][m];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>a[i][j];
+        }
+    }
+    //xay his
+
+    int tmp[n][m];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(i==0){
+                tmp[i][j]=a[i][j];
+            }
+            else{
+                if(a[i][j]){
+                    tmp[i][j]=tmp[i-1][j]+1;
+                }
+                else tmp[i][j]=0;
+            }
+        }
+    }
+    int ans=0;
+    for(int i=0;i<n;i++){
+        ans=max(ans,tinh_max(tmp[i],m));
+    }
+    cout<<ans<<endl;
+}
+int main(){
+    solve();
+    system("pause");
+}
