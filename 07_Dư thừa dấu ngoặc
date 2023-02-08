@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pii pair<int,int>
+const int MOD = (int)(1e9+7);
+
+bool check(string s){
+    stack<char>st;
+    for(char x:s){
+        if(x!=')'){
+            st.push(x);
+        }
+        else{
+            bool thua=1;
+            while(st.top()!='('){
+                char c=st.top();
+                if(c=='+'||c=='-'||c=='*'||c=='/'){
+                    thua=0;
+                }
+                st.pop();
+            }
+            if(thua) return true;
+            st.pop();
+        }
+    }
+    return false;
+}
+
+int main(){
+    string s;
+    cin>>s;
+    if(check(s))cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+    system("pause");
+}
