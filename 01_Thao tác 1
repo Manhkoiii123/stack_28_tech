@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pii pair<int,int>
+const int MOD = (int)(1e9+7);
+int main(){
+    int t;
+    cin>>t;
+    stack<int>st;
+    
+    while(t--){
+        string s;
+        cin>>s;
+        if(s=="show"){
+            vector<int>v;
+            while(!st.empty()){
+                v.push_back(st.top());
+                st.pop();
+            }
+            
+            if(v.size()==0){
+                cout<<"EMPTY";
+            }
+            reverse(v.begin(),v.end());
+            for(int a : v){
+                cout<<a<<" ";
+                st.push(a);
+            }
+            cout<<endl;
+        }
+        else if(s=="push"){
+            int x;
+            cin>>x;
+            st.push(x);
+        }
+        else{
+            if(st.empty() == false) st.pop();
+        }
+    }
+}
