@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pii pair<int,int>
+const int MOD = (int)(1e9+7);
+int main(){
+    string s;
+    cin>>s;
+    int k;
+    cin>>k;
+    stack<char>st;
+    for(int i=0;i<s.length();i++){
+        if(st.empty()){
+            st.push(s[i]);
+            
+        }
+        else if(s[i]==st.top()){
+            int ans=0;
+            while(!st.empty()&&st.top()==s[i]){
+                ++ans;
+                st.pop();
+                
+            }
+            if(ans<k-1){
+                for(int j=0;j<=ans;j++){
+                    st.push(s[i]);
+                    
+                }
+            }
+        }
+        else {
+            st.push(s[i]);
+            
+        }
+    }
+    
+    vector<char>v;
+    while(!st.empty()){
+        v.push_back(st.top());
+        st.pop();
+    }
+    reverse(v.begin(),v.end());
+    if(v.size()==0){
+        cout<<"EMPTY"<<endl;
+    }
+    else{
+        for(char x:v){
+            cout<<x;
+        }
+        cout<<endl;
+    }
+    system("pause");
+}
