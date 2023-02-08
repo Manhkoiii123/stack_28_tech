@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+const int MOD = (int)(1e9+7);
+void solve(){
+    string s;
+    cin>>s;
+    stack<int>st;
+    for(int i=0;i<s.length();i++){
+        if(isdigit(s[i])) st.push((s[i]-'0'));
+        else{
+            int s1=st.top();st.pop();
+            int s2=st.top();st.pop();
+            int new_s;
+            if(s[i]=='+'){
+                new_s=s2+s1;
+            }
+            else if(s[i]=='-'){
+                new_s=s2-s1;
+            }
+            else if(s[i]=='*'){
+                new_s=s2*s1;
+            }
+            else if(s[i]=='/'){
+                new_s=s2/s1;
+            }
+            else if(s[i]=='^'){
+                new_s=pow(s2,s1);
+            }
+            st.push(new_s);
+        }
+    }
+    cout<<st.top()<<endl;
+}
+int main(){
+   
+        solve();
+    
+    system("pause");
+}
