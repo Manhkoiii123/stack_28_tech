@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+const int MOD = (int)(1e9+7);
+
+int uu_tien(char c){
+    if(c=='^') return 4;
+    if(c=='*'||c=='/') return 3;
+    if(c=='+'||c=='-') return 2;
+    if(c=='('||c==')') return 1;
+    return 0;
+}
+
+void solve(){
+    string s;
+    cin>>s;
+    reverse(s.begin(),s.end());
+    
+    stack<char>st;
+    string ans="";
+    for(int i=0;i<s.length();i++){
+        if(isalpha(s[i])) ans+=s[i];
+        else{
+            if(s[i]==')'){
+                st.push(s[i]);
+            }
+            else if(s[i]=='('){
+                while(!st.empty()&&st.top()!=')'){
+                    ans+=st.top();
+                    st.pop();
+                }
+                if(st.top()==')') st.pop();
+            }
+            else {
+                while(!st.empty() && uu_tien(s[i])<uu_tien(st.top())){
+                    ans+=st.top();
+                    st.pop();
+                }
+                st.push(s[i]);
+            }
+        }
+    }
+    while(!st.empty()){
+        if(st.top()!='('&&st.top()!=')'){
+            ans+=st.top();
+        }
+        st.pop();
+    }
+    reverse(ans.begin(),ans.end());
+    cout<<ans<<endl;
+   
+    
+}
+int main(){
+    solve();
+    //system("pause");
+}
